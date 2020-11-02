@@ -1,8 +1,14 @@
-int b = 2;
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+int main()	{
+	int b = 2;
 	int i = 0;
+	int a = 1;
 	while (i < 20) {
 		if (a > b) { b += a; cout << b << endl; }
 		else { a += b; cout << a << endl; }
 		i++;
 	}
-	system("pause");
+	return 0;
+}

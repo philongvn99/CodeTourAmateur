@@ -7,7 +7,8 @@ using namespace std;
 int main() {
     // JerryPasswords();
     // ROX();
-    ARRAY();
+    // ARRAY();
+    SUM();
 
     return 0;
 }

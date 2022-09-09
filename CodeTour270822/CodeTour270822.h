@@ -47,17 +47,48 @@ int JerryPasswords() {
 }
 
 int SUM() {
-    int M, N, K, Q;
+    int M, N, K, Q, centerR, centerC, runRow, runLeftCol, runRightCol;
     cin >> M >> N >> K;
-    vector< vector<int> > agri( M , vector<int> (N, 0)); 
-    for(int i = 0; i < M; i++){
-        for(int j = 0; j < N; j++){
+    vector< vector<unsigned short int> > agri( M + 1, vector<unsigned short int> (N + 1, 0)); 
+    for(int i = 1; i <= M; i++){
+        for(int j = 1; j <= N; j++){
             cin >> agri[i][j];
+            agri[i][j] += agri[i][j-1];
         }
-        cin >> Q;
     }
+
+    cin >> Q;
+    vector<unsigned short int> value(Q, 0);
+    
+    for(int i = 0; i < Q; i++){
+
+        cin >> centerR >> centerC;
+
+        runRow = max(centerR - K, 1);
+
+
+        while((runRow <= M) && (runRow <= centerR + K)) {
+            runRightCol = min(centerC + K - abs(centerR - runRow), N);
+            runLeftCol = max(centerC - K + abs(centerR - runRow), 1);
+            value[i] += agri[runRow][runRightCol] - agri[runRow][runLeftCol - 1];
+            runRow++;
+        }
+    }
+
+    for(int i = 0; i < Q; i++) cout <<  value[i] << endl;
+
     return 0;
 }
+/*
+4 3 2
+1 3 2
+2 4 1
+3 3 1
+5 2 4
+2
+1 1
+4 2
+*/
 
 int ARRAY() {
     unsigned short int n;
@@ -76,5 +107,7 @@ int ARRAY() {
     return 0;
 }
 
-// 11
-// 1 5 3 5 7 1 6 2 8 9 1
+/*
+11
+1 5 3 5 7 1 6 2 8 9 1
+*/
